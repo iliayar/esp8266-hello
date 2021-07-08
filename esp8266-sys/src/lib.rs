@@ -24,3 +24,8 @@ pub mod std {
 }
 
 include!("bindings.rs");
+
+pub type portTickType = TickType_t;
+pub const configTICK_RATE_HZ: portTickType = CONFIG_FREERTOS_HZ;
+pub const portTICK_PERIOD_MS: portTickType = (1_000 as portTickType) / configTICK_RATE_HZ;
+pub const portTICK_RATE_MS: portTickType = portTICK_PERIOD_MS;
