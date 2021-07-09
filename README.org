@@ -46,13 +46,15 @@ cd rust-xtensa
 ./x.py build
 #+END_SRC
 ** Download ESP8266 toolchain
-Download archive, then src_shell{tar -xvf xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz}
+Download archive, ~tar -xvf xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz~
 ** Building example
 #+BEGIN_SRC shell
 cd ~/Repos/esp8266-hello
 #+END_SRC
-Edit ~setenv.sh~ and src_shell{source setenv.sh}. Register xtensa once src_shell{rustup toolchain link xtensa $HOME/.local/share/esp8266/rust-xtensa/build/x86_64-unknown-linux-gnu/stage1}
+Edit ~setenv.sh~ for your environment
 #+BEGIN_SRC shell
+source setenv.sh
+rustup toolchain link xtensa $HOME/.local/share/esp8266/rust-xtensa/build/x86_64-unknown-linux-gnu/stage1 # Once
 make app
 ./bindgen.sh esp8266-sys
 ./build.sh
