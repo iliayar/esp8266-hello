@@ -1,0 +1,60 @@
+#+TITLE: ESP8266 Example
+
+* Building
+** Clone
+#+BEGIN_SRC shell
+cd ~/Repos
+git clone --recursive https://github.com/iliayar/esp8266-hello.git
+#+END_SRC
+** LLVM + CLang libraries
+#+BEGIN_SRC shell
+cd ~/.local/share
+mkdir esp8266
+cd esp8266
+git clone https://github.com/espressif/llvm-project
+cd llvm-project
+#+END_SRC
+Currently there is a bug on default branch on commit
+~ae554dd1c9e2f31067f3c7d0a54ee8945d3df8f5~ that requires this patch
+for compiling:
+#+BEGIN_SRC diff
+diff --git a/llvm/utils/benchmark/src/benchmark_register.h b/llvm/utils/benchmark/src/benchmark_register.h
+index 0705e219f2f..6001fb8e0e4 100644
+--- a/llvm/utils/benchmark/src/benchmark_register.h
++++ b/llvm/utils/benchmark/src/benchmark_register.h
+@@ -2,6 +2,7 @@
+ #define BENCHMARK_REGISTER_H
+
+ #include <vector>
++#include <limits>
+
+ #include "check.h"
+#+END_SRC
+#+BEGIN_SRC shell
+cd llvm
+mkdir build
+cd build
+cmake -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="Xtensa" -DLLVM_ENABLE_PROJECTS="clang" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="X86" ..
+cmake --build . -j8
+#+END_SRC
+** Rust xtensa
+#+BEGIN_SRC shell
+cd ~/.local/share/esp8266
+git clone https://github.com/MabezDev/rust-xtensa
+cd rust-xtensa
+./configure --llvm-root=$HOME/.local/share/esp8266/llvm-project/llvm/build
+./x.py build
+#+END_SRC
+** Download ESP8266 toolchain
+Download archive, then src_shell{tar -xvf xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz}
+** Building example
+#+BEGIN_SRC shell
+cd ~/Repos/esp8266-hello
+#+END_SRC
+Edit ~setenv.sh~ and src_shell{source setenv.sh}. Register xtensa once src_shell{rustup toolchain link xtensa $HOME/.local/share/esp8266/rust-xtensa/build/x86_64-unknown-linux-gnu/stage1}
+#+BEGIN_SRC shell
+make app
+./bindgen.sh esp8266-sys
+./build.sh
+#+END_SRC
+

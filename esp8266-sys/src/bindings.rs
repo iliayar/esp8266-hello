@@ -2523,7 +2523,7 @@ pub struct __pthread_cond_s {
 pub union __pthread_cond_s__bindgen_ty_1 {
     pub __wseq: ::std::os::raw::c_ulonglong,
     pub __wseq32: __pthread_cond_s__bindgen_ty_1__bindgen_ty_1,
-    _bindgen_union_align: [u32; 2usize],
+    _bindgen_union_align: u64,
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2536,7 +2536,7 @@ pub struct __pthread_cond_s__bindgen_ty_1__bindgen_ty_1 {
 pub union __pthread_cond_s__bindgen_ty_2 {
     pub __g1_start: ::std::os::raw::c_ulonglong,
     pub __g1_start32: __pthread_cond_s__bindgen_ty_2__bindgen_ty_1,
-    _bindgen_union_align: [u32; 2usize],
+    _bindgen_union_align: u64,
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2589,7 +2589,7 @@ pub union pthread_cond_t {
     pub __data: __pthread_cond_s,
     pub __size: [::std::os::raw::c_char; 48usize],
     pub __align: ::std::os::raw::c_longlong,
-    _bindgen_union_align: [u32; 12usize],
+    _bindgen_union_align: [u64; 6usize],
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -3072,7 +3072,6 @@ pub type uint_fast64_t = ::std::os::raw::c_ulonglong;
 pub type intmax_t = __intmax_t;
 pub type uintmax_t = __uintmax_t;
 #[repr(C)]
-#[repr(align(8))]
 #[derive(Debug, Copy, Clone)]
 pub struct max_align_t {
     pub __clang_max_align_nonce1: ::std::os::raw::c_longlong,
@@ -4804,6 +4803,7 @@ pub struct mem_blk {
     #[doc = "< Point to next memory block"]
     pub next: *mut mem_blk,
 }
+#[doc = " First type memory block."]
 pub type mem_blk_t = mem_blk;
 pub type mem2_blk_t = mem_blk_t;
 #[doc = " User region information."]
@@ -4823,6 +4823,7 @@ pub struct heap_region {
     #[doc = "< Minimum free heap size by byte ever"]
     pub min_free_bytes: size_t,
 }
+#[doc = " User region information."]
 pub type heap_region_t = heap_region;
 extern "C" {
     #[doc = " @brief Get the total free size of all the regions that have the given capabilities"]
@@ -6559,6 +6560,8 @@ pub struct xTASK_SNAPSHOT {
     #[doc = "pxTopOfStack > pxEndOfStack, stack grows lo2hi"]
     pub pxEndOfStack: *mut StackType_t,
 }
+#[doc = " Used with the uxTaskGetSnapshotAll() function to save memory snapshot of each task in the system."]
+#[doc = " We need this struct because TCB_t is defined (hidden) in tasks.c."]
 pub type TaskSnapshot_t = xTASK_SNAPSHOT;
 extern "C" {
     pub fn uxTaskGetSnapshotAll(

@@ -8,7 +8,7 @@ COMPS=${IDF_PATH}/components
 # SYSROOT=${ESP_TOOLCHAIN}/xtensa-lx106-elf/sys-include
 
 BINDGEN=bindgen
-LIBCLANG_PATH=${LLVM_ROOT}/build/lib
+LIBCLANG_PATH=${LLVM_ROOT}/llvm/build/lib
 CLANG_FLAGS="\
     -I${PWD}/build/include \
     -D__bindgen \
