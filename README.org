@@ -46,7 +46,7 @@ cd rust-xtensa
 ./x.py build
 #+END_SRC
 ** Download ESP8266 toolchain
-Download archive, ~tar -xvf xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz~
+Download archive from https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/linux-setup.html, ~tar -xvf xtensa-lx106-elf-gcc8_4_0-esp-2020r3-linux-amd64.tar.gz~
 ** Building example
 #+BEGIN_SRC shell
 cd ~/Repos/esp8266-hello
