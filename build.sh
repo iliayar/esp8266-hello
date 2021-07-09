@@ -15,8 +15,8 @@ $IDF_PATH/components/esptool_py/esptool/esptool.py \
 	--flash_mode "dio" \
 	--flash_freq "40m" \
 	--flash_size "2MB" \
-	-o $TARGET_DIR/esp32-hello.bin \
-	$TARGET_DIR/esp32-hello
+	-o $TARGET_DIR/esp8266-hello.bin \
+	$TARGET_DIR/esp8266-hello
     
 $IDF_PATH/components/esptool_py/esptool/esptool.py \
     --chip esp8266 \
@@ -25,4 +25,4 @@ $IDF_PATH/components/esptool_py/esptool/esptool.py \
     --flash_mode "dio" \
     --flash_freq "40m" \
     --flash_size "2MB" \
-    0x10000 $TARGET_DIR/esp32-hello.bin
+    0x10000 $TARGET_DIR/esp8266-hello.bin
